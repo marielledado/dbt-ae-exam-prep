@@ -1,4 +1,4 @@
-import { evidence } from "./evidence";
+import { evidence } from "./evidenceBank";
 import { formatOf } from "./grading";
 import { Answer, Presentation, Question } from "./types";
 

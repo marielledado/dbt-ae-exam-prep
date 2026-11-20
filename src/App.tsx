@@ -30,7 +30,7 @@ import {
 import { Answer, Question, ExamMode, ExamSession, QuestionFormat } from "./types";
 import { allQuestions as examQuestions } from "./questionBank";
 import { CATEGORIES, EXAM_TOPICS, topicOf } from "./examTopics";
-import { evidence } from "./evidence";
+import { evidence } from "./evidenceBank";
 import { DoubtfulMarks, loadDoubtful, saveDoubtful, toggleDoubtful } from "./doubtful";
 import EvidenceBlock from "./components/EvidenceBlock";
 import DoubtfulToggle from "./components/DoubtfulToggle";

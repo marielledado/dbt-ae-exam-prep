@@ -64,6 +64,29 @@ React, TypeScript, Vite, Tailwind CSS, Motion and Lucide icons. See `package.jso
 - `src/examTopics.ts`: the seven exam topics and their sub-topics.
 - `docs/exam-style-guide.md`: the rules questions are written to.
 
+## Questions added in this fork
+
+This fork adds questions to the original bank and a check that runs on GitHub.
+
+- `src/customQuestions.ts`: the added questions, with ids from 9001.
+- `src/customEvidence.ts`: the evidence for each added question. Every entry has the commands and observed output of a run on dbt Core 1.11, and most also have a short quote from the dbt docs.
+- `scripts/check-bank.ts`: checks the structure of every question, and looks up every evidence quote in the dbt docs source.
+- `.github/workflows/check.yml`: runs the type check and that script on every push and pull request, and every Monday.
+
+To add questions:
+
+1. Add the question to `src/customQuestions.ts` with the next free id, following `docs/exam-style-guide.md`.
+2. Add its evidence to `src/customEvidence.ts`.
+3. Run the checks:
+
+   ```bash
+   git clone --depth 1 https://github.com/dbt-labs/docs.getdbt.com ../dbt-docs
+   npm run lint
+   npm run check -- --docs ../dbt-docs
+   ```
+
+A question added in this fork fails the check when it has no evidence or when one of its quotes is not in the docs source. A quote of the original repo that is not found is reported as a warning only.
+
 ## License
 
 [MIT](LICENSE). You can use, change and share this project freely. Copies, changed or not, must keep the copyright notice and license text.

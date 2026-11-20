@@ -1,0 +1,28 @@
+name: Check question bank
+
+# Runs on every push and pull request, and every Monday.
+# The Monday run reports a quote that no longer appears in the dbt docs.
+on:
+  push:
+  pull_request:
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm install
+      - name: Type check
+        run: npm run lint
+      - name: Fetch the dbt docs source
+        run: |
+          git clone --depth 1 --filter=blob:none --sparse https://github.com/dbt-labs/docs.getdbt.com dbt-docs
+          git -C dbt-docs sparse-checkout set website/docs website/blog website/snippets
+      - name: Check questions and evidence quotes
+        run: npm run check -- --docs dbt-docs

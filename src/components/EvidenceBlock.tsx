@@ -1,5 +1,5 @@
 import { ExternalLink, FlaskConical, Quote } from "lucide-react";
-import { evidence } from "../evidence";
+import { evidence } from "../evidenceBank";
 import FormattedText from "./FormattedText";
 
 /** Quotes are verbatim docs markdown; show a link's text and drop its target, which the page link already covers. */
