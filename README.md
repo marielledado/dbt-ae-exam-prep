@@ -70,6 +70,7 @@ This fork adds questions to the original bank and a check that runs on GitHub.
 
 - `src/customQuestions.ts`: the added questions, with ids from 9001.
 - `src/customEvidence.ts`: the evidence for each added question. Every entry has the commands and observed output of a run on dbt Core 1.11, and most also have a short quote from the dbt docs.
+- `src/withheld.ts`: ids of 14 original questions that test features outside the 1.11 topics outline. The app leaves them out.
 - `scripts/check-bank.ts`: checks the structure of every question, and looks up every evidence quote in the dbt docs source.
 - `.github/workflows/check.yml`: runs the type check and that script on every push and pull request, and every Monday.
 

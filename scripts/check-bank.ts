@@ -17,6 +17,7 @@ import { CATEGORIES } from "../src/examTopics";
 import { blankNumbers, formatOf, isMultipleChoice } from "../src/grading";
 import { allQuestions } from "../src/questionBank";
 import type { Question } from "../src/types";
+import { outOfOutlineIds } from "../src/withheld";
 
 const FIRST_CUSTOM_ID = 9001;
 const errors: string[] = [];
@@ -97,7 +98,7 @@ for (const q of allQuestions) {
   if (entry && entry.quotes.length === 0 && !entry.run) errors.push(`#${q.id}: evidence entry has neither a quote nor a run`);
 }
 for (const id of Object.keys(evidence).map(Number)) {
-  if (!seenIds.has(id)) errors.push(`#${id}: evidence entry has no question`);
+  if (!seenIds.has(id) && !outOfOutlineIds.has(id)) errors.push(`#${id}: evidence entry has no question`);
 }
 
 // --- Quotes against the docs source ------------------------------------------------------------
@@ -135,6 +136,7 @@ for (const q of served) perFormat.set(formatOf(q), (perFormat.get(formatOf(q)) ?
 
 console.log(`${allQuestions.length} questions, ${served.length} with evidence, ${served.filter((q) => isCustom(q.id)).length} of them added in this fork.`);
 console.log(`By format: ${[...perFormat].map(([format, count]) => `${format} ${count}`).join(", ")}.`);
+console.log(`${outOfOutlineIds.size} original questions are left out as outside the 1.11 outline (src/withheld.ts).`);
 if (docsFlag !== -1) console.log(`${quotesChecked} quotes looked up in the docs source.`);
 for (const warning of warnings) console.log(`warning  ${warning}`);
 for (const error of errors) console.log(`error    ${error}`);
